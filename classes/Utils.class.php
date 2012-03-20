@@ -9,13 +9,17 @@ class Utils
 {
     /**
      * Redirect user
-     * @param string $page
+     * @param string $page Default = null -> to redirect to the same page.
      * @param string $message
      * @param string $status Eg: success, failure etc
      * @param string $context Eg: signup, account_activation etc
      */
-    public static function redirect($page, $message=null, $status='success', $context=null)
+    public static function redirect($page = null, $message = null, $status = 'success', $context = null)
     {
+        if (!$page)
+        {
+            $page = basename($_SERVER['PHP_SELF']);
+        }
         self::set_message($message, $status, $context);
         header("Location: $page");
         die;
