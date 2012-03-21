@@ -13,7 +13,8 @@ class validate
      * @param mixed $value eg: admin
      */
     public static function check_already_exists($table, $db_field, $value) {
-        $res = $this->getdbcontents_sql("SELECT COUNT(*) as count FROM ".$table." WHERE ".$db_field."='$value'");
+        $res = mysql_query("SELECT COUNT(*) as count FROM ".$table." WHERE ".$db_field."='$value'");
+        $res = mysql_fetch_array($res);
         if ($res[0]['count'] > 0)
         {
             return true; // value already exists!
