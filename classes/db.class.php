@@ -83,11 +83,12 @@ class Db
      * @param string $table table name
      * @param array $required_fields Eg: array('first_name', 'last_name')
      * @param array $conditions conditions as key=>value pairs Eg: array('id'=>'100')
+     * @param number $start
      * @param number $limit
      * @param string $extra_params Eg: ORDER BY rank DESC
      * @param boolean $echo Echo the query
      */
-    public function select($table, array $required_fields = null, array $conditions = null, $limit = null, $extra_params = null, $echo = false)
+    public function select($table, array $required_fields = null, array $conditions = null, $start = null, $limit = null, $extra_params = null, $echo = false)
     {
         $fields = " * ";
         $condn = " 1 ";
@@ -107,7 +108,11 @@ class Db
             }
         }
         
-        if ($limit && is_numeric($limit))
+        if ($start && is_numeric($start) && $limit && is_numeric($limit))
+        {
+            $limit_condn = " LIMIT $start, $limit ";
+        }
+        elseif ($limit && is_numeric($limit))
         {
             $limit_condn = " LIMIT $limit ";
         }
