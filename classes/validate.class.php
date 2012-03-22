@@ -9,6 +9,7 @@ class validate
 {
     /**
      * Check whether the given value already exists in the specified db_field.
+     * @param string $table
      * @param string $db_field eg: username
      * @param mixed $value eg: admin
      */
