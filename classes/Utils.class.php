@@ -18,7 +18,8 @@ class Utils
     {
         if (!$page)
         {
-            $page = basename($_SERVER['PHP_SELF']);
+            $query_string = $_SERVER['QUERY_STRING'] != ''? '?'.$_SERVER['QUERY_STRING']: null;
+            $page = basename($_SERVER['PHP_SELF']).$query_string;
         }
         self::set_message($message, $status, $context);
         header("Location: $page");
