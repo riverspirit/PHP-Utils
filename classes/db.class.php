@@ -118,7 +118,7 @@ class Db
         }
         
         $query = "SELECT {$fields} FROM `{$table}` WHERE {$condn} {$extra_params} {$limit_condn}";
-        $result = $this->query($query);
+        $result = $this->query($query, $echo);
         
         while ($row = mysql_fetch_assoc($result))
         {
