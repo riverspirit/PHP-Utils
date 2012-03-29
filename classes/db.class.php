@@ -226,6 +226,25 @@ class Db
         $this->num_affected_rows = mysql_affected_rows();
         return $this->num_affected_rows;
     }
+    
+    /**
+     * Get number of rows in a query result. Accepts all params accepted by Db::select() other than $required_fields
+     * @param string $table table name
+     * @param array $conditions conditions as key=>value pairs Eg: array('id'=>'100')
+     * @param number $start
+     * @param number $limit
+     * @param string $extra_params Eg: ORDER BY rank DESC
+     * @param boolean $echo Echo the query
+     * 
+     * @return number | null
+     */
+    public function get_row_count($table, array $conditions = null, $start = null, $limit = null, $extra_params = null, $echo = false)
+    {
+        $required_field = array("COUNT(*) AS count");
+        $result = $this->select($table, $required_field, $conditions, $start, $limit, $extra_params, $echo);
+        $count = isset ($result[0]['count'])? $result[0]['count']: null;
+        return $count;
+    }
         
     public function insert_id()
     {
