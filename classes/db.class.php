@@ -2,7 +2,10 @@
 /**
  * Db wrapper using Singleton pattern
  * @author Saurabh
- *
+ * 
+ * @copyright Saurabh Nair < saurabh@rebugged.com >
+ * @license MIT http://www.opensource.org/licenses/mit-license.php
+ * @package PHP-Utils
  */
 class Db
 {
@@ -22,6 +25,10 @@ class Db
         }
     }
     
+    /**
+     * Return the singleton object of the Db class
+     * @return object
+     */
     public static function getInstance()
     {
         if (!self::$instance)
