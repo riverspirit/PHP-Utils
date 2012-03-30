@@ -3,7 +3,10 @@
 /**
  * Common utility functions
  * @author Saurabh aka JSX
- * @version 0.1
+ * 
+ * @copyright Saurabh Nair < saurabh@rebugged.com >
+ * @license MIT http://www.opensource.org/licenses/mit-license.php
+ * @package PHP-Utils
  */
 class Utils
 {

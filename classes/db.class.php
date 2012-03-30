@@ -1,7 +1,7 @@
 <?php
 /**
  * Db wrapper using Singleton pattern
- * @author Saurabh
+ * @author Saurabh aka JSX <saurabh@rebugged.com>
  * 
  * @copyright Saurabh Nair < saurabh@rebugged.com >
  * @license MIT http://www.opensource.org/licenses/mit-license.php

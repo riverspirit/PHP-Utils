@@ -2,7 +2,10 @@
 /**
  * Validation class - Contains utilites to handle common valiadtion scenarios
  * @author Saurabh aka JSX <saurabh@rebugged.com>
- * @version 0.1
+ * 
+ * @copyright Saurabh Nair < saurabh@rebugged.com >
+ * @license MIT http://www.opensource.org/licenses/mit-license.php
+ * @package PHP-Utils
  */
 
 class validate
