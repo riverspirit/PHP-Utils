@@ -21,8 +21,8 @@ class Utils
     {
         if (!$page)
         {
-            $query_string = $_SERVER['QUERY_STRING'] != ''? '?'.$_SERVER['QUERY_STRING']: null;
-            $page = basename($_SERVER['PHP_SELF']).$query_string;
+            $protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')? "https://" : "http://";
+            $page = $protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
         }
         self::set_message($message, $status, $context);
         header("Location: $page");
