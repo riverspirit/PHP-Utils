@@ -140,6 +140,11 @@ class Utils
 	    return $trimmed_string;
 	}
     
+    public static function create_seo_url()
+    {
+        //
+    }
+    
 }
 
 ?>
