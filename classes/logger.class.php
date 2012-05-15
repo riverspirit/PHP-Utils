@@ -11,7 +11,7 @@
 class Logger
 {
     private static $instance;
-    private $prepender_format = '{[Y-m-d H:i:s]} {_type} : {_message}';
+    private $prepender_format = '[{timestamp}] {type}: ';
     private $log_fp = null;
     private $log_levels = array('LOG' => 0, 'DEBUG' => 1, 'WARN' => 2, 'ERROR' => 3);
     private $required_log_level;
@@ -77,7 +77,7 @@ class Logger
 
     private function add_log($log_type, $log_message)
     {
-        $log_message = $this->get_log_prepender($this->prepender_format).$log_message."\n";
+        $log_message = $this->get_log_prepender($log_type).$log_message."\n";
         $logged = fputs($this->log_fp, $log_message);
         if ($logged)
         {
@@ -86,8 +86,11 @@ class Logger
         return false;
     }
     
-    private function get_log_prepender($prepender_format)
+    private function get_log_prepender($message_type)
     {
-        return "[".date('Y-m-d H:i:s')."] LOG : ";
+        $needles = array('{timestamp}', '{type}');
+        $replaces = array(date('Y-m-d H:i:s'), $message_type);
+        $prepender_text = str_replace($needles, $replaces, $this->prepender_format);
+        return $prepender_text;
     }
 }
