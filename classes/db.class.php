@@ -29,7 +29,7 @@ class Db
      * Return the singleton object of the Db class
      * @return object
      */
-    public static function getInstance()
+    public static function get_instance()
     {
         if (!self::$instance)
         {
@@ -126,6 +126,11 @@ class Db
         
         $query = "SELECT {$fields} FROM `{$table}` WHERE {$condn} {$extra_params} {$limit_condn}";
         $result = $this->query($query, $echo);
+        
+        if (!$result)
+        {
+            return null;
+        }
         
         while ($row = mysql_fetch_assoc($result))
         {
