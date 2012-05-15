@@ -10,27 +10,16 @@
 
 class Logger
 {
-    private static $instance;
     private $prepender_format = '[{timestamp}] {type}: ';
     private $log_fp = null;
     private $log_levels = array('LOG' => 0, 'DEBUG' => 1, 'WARN' => 2, 'ERROR' => 3);
     private $required_log_level;
 
 
-    private function __construct($log_file_name, $log_level)
+    public function __construct($log_file_name, $log_level)
     {
         $this->log_fp = fopen($log_file_name, "a+");
         $this->required_log_level = strtoupper($log_level);
-    }
-    
-    
-    public static function new_log($log_file_name, $log_level)
-    {
-        if (!self::$instance)
-        {
-            self::$instance = new Logger($log_file_name, $log_level);
-        }
-        return self::$instance;
     }
     
     public function log($message)
