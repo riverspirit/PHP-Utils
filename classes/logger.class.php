@@ -93,4 +93,9 @@ class Logger
         $prepender_text = str_replace($needles, $replaces, $this->prepender_format);
         return $prepender_text;
     }
+    
+    public function __destruct()
+    {
+        fclose($this->log_fp);
+    }
 }
