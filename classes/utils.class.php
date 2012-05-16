@@ -96,6 +96,14 @@ class Utils
         $months = gmdate('n', $stamp);
         $years = gmdate('Y', $stamp);
         
+        if ($years < 1970)
+        {
+            $long_time = date('Y') - 1970;
+            return "more than ".$long_time." years ";
+        }
+        
+        $years = $years - 1970;
+        
         if ($stamp < 60)
         {
             $time_string = (int)$seconds." seconds ";
