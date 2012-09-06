@@ -49,6 +49,8 @@ class validate
      * Validate email address
      * @param string $email
      * @return boolean
+     * 
+     * @assert ('user@example.com') == true
      */
     public static function is_email($email) {
         return preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/', strtolower($email));
@@ -57,11 +59,15 @@ class validate
     
     /**
      * Checks if the given value is in a valid us phone number format.
-     * Eg: Both 555-123-1111 and 5551231111 will be valid
+     * Eg: Both 555-123-1111, 5551231111, (555) 123-1111 and (555)123-1111 will be valid
      * @param string $phone
      */
     public static function is_us_phone($phone) {
-        return preg_match('/^[0-9]{3}-[0-9]{3}-[0-9]{4}$|^[0-9]{10}$/', $phone); // \m/
+        $format1 = '^[0-9]{3}-[0-9]{3}-[0-9]{4}$';
+        $format2 = '^[0-9]{10}$';
+        $format3 = '^\([0-9]{3}\) ?[0-9]{3}-[0-9]{4}$';
+        
+        return preg_match("/$format1|$format2|$format3/", $phone); // \m/
     }
 	
     
@@ -116,6 +122,35 @@ class validate
             }
         }
         return $data;
+    }
+    
+    /**
+     * Validates common URL patterns
+     * @param string $url
+     * @return boolean
+     */
+    public static function is_valid_url($url)
+    {
+        $pattern = '/^(([\w]+:)?\/\/)?(([\d\w]|%[a-fA-f\d]{2,2})+(:([\d\w]|%[a-fA-f\d]{2,2})+)?@)?([\d\w][-\d\w]{0,253}[\d\w]\.)+[\w]{2,4}(:[\d]+)?(\/([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)*(\?(&amp;?([-+_~.\d\w]|%[a-fA-f\d]{2,2})=?)*)?(#([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)?$/';
+        return preg_match($pattern, $url);
+    }
+    
+    
+    /**
+     * Checks if a string is in valid date time format
+     * @param string $datetime
+     * @return boolean
+     */
+    public static function is_valid_datetime($datetime)
+    {
+        if (preg_match("/^(\d{4})-(\d{2})-(\d{2}) ([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$/", $datetime, $matches))
+        {
+            if (checkdate($matches[2], $matches[3], $matches[1]))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

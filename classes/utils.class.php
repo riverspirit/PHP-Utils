@@ -153,6 +153,11 @@ class Utils
         //
     }
     
+    public function format_url()
+    {
+        //
+    }
+    
 }
 
 ?>
