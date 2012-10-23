@@ -147,6 +147,20 @@ class Utils
 	    $trimmed_string = isset($length) ? substr($string, 0, $length).$tail : $string;
 	    return $trimmed_string;
 	}
+	
+	/**
+	 * Get the title of a remote web page, given the URL
+	 *
+	 * @param string $url URL of the remote web page
+	 * @return string title
+	 */
+	public static function get_page_title($url)
+    {
+        $page_markup = file_get_contents($url);
+        preg_match("|<title>(.*?)</title>|i", $page_markup, $matches);
+        $title = $matches[1];
+        return $title;
+    }   
     
     public static function create_seo_url()
     {
