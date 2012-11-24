@@ -147,6 +147,50 @@ class Utils
 	    $trimmed_string = isset($length) ? substr($string, 0, $length).$tail : $string;
 	    return $trimmed_string;
 	}
+	
+	/**
+	 * Get the title of a remote web page, given the URL
+	 *
+	 * @param string $url URL of the remote web page
+	 * @return string title
+	 */
+	public static function get_page_title($url)
+    {
+        $page_markup = file_get_contents($url);
+        preg_match("|<title>(.*?)</title>|i", $page_markup, $matches);
+        $title = $matches[1];
+        return $title;
+    }
+    
+    
+    /**
+     * Create the html code for a select list from a given array
+     * @param array $items_array Array to be used to create te select list
+     * @param string $index_value Name of the array key to be used as 'value' in the select list
+     * @param string $index_text Name of the array key to be used as text in the select list
+     * @param string $selected_index Value of the selected index, if any. Else, leave NULL
+     * @param string $extra_params This string will be appended as attribute of the select list Eg: name='mylist'
+     * @return string
+     */
+    public static function get_select_list_from_array($items_array, $index_value, $index_text, $selected_index = NULL, $extra_params = "")
+    {
+        $html = "<option>Select</option>";
+        
+        foreach ($items_array as $item)
+        {
+            $selected = '';
+            
+            if ($item[$index_value] == $selected_index)
+            {
+                $selected = "selected = 'true'";
+            }
+            
+            $html .= "<option value='{$item[$index_value]}' {$selected}>{$item[$index_text]}</option>";
+        }
+        
+        $html = "<select {$extra_params}>{$html}</select>";
+        return $html;
+    }
     
     public static function create_seo_url()
     {
